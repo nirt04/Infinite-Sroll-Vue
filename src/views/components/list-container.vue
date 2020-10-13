@@ -15,9 +15,6 @@
 </template>
 <script>
 export default {
-  created() {
-    console.log(this);
-  },
   props: {
     list: {
       type: Array,
