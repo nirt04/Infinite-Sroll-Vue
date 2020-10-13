@@ -6,7 +6,6 @@
   </div>
 </template>
 <script>
-/* eslint-disable */
 
 import InfiniteLoading from "vue-infinite-loading";
 import ListContainer from "./components/list-container.vue";
@@ -14,17 +13,17 @@ import ListContainer from "./components/list-container.vue";
 export default {
   computed: {
     itemsCount() {
-      return this.ROW_LIST.length / this.arrayPagesNum;
+      return this.ROW_LIST.length / this.maxPages;
     },
   },
 
   methods: {
-    getLastRenderedIndex(pageNum, arrayPagesNum, array) {  
-      return pageNum < 2 ? 0 : (pageNum - 1) * (array.length / arrayPagesNum);
+    getLastRenderedIndex(pageNum, maxPages, array) {  
+      return pageNum < 2 ? 0 : (pageNum - 1) * (array.length / maxPages);
     },
 
     getItems(itemsCount, page) {
-      const lastRenderedItemIndex = this.getLastRenderedIndex(page, this.arrayPagesNum, this.ROW_LIST)
+      const lastRenderedItemIndex = this.getLastRenderedIndex(page, this.maxPages, this.ROW_LIST)
       return [...this.ROW_LIST].splice( lastRenderedItemIndex, itemsCount );
     },
 
@@ -47,7 +46,7 @@ export default {
   data() {
     return {
       page: 1,
-      arrayPagesNum: 5,
+      maxPages: 5,
       arrayToRender: [],
       ROW_LIST: new Array(1000)
         .fill(null)
