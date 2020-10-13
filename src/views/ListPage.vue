@@ -19,11 +19,11 @@ export default {
       const that = this;
       const itemsCount = this.ROW_LIST.length / 5;
       setTimeout(() => {
-        const newItems = this.getItems(itemsCount, that.iter);
-        
+        const newItems = this.getItems(itemsCount, that.page);
+
         if (newItems.length > 0) {
           that.arrayToRender.push(...newItems);
-          that.iter = that.iter + 1;
+          that.page = that.page + 1;
           $state.loaded();
         } else {
           $state.complete();
@@ -33,7 +33,7 @@ export default {
   },
   data() {
     return {
-      iter: 1,
+      page: 1,
       arrayToRender: [],
       ROW_LIST: new Array(1000)
         .fill(null)
