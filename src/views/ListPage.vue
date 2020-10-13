@@ -15,7 +15,6 @@ export default {
   methods: {
     getItems(itemsCount, page) {
       const curItemIndex = page === 1 ? 0 : (page - 1) * (this.ROW_LIST.length / 5);
-      debugger;
       return [...this.ROW_LIST].splice(curItemIndex, itemsCount);
     },
     infiniteHandler($state) {
@@ -23,10 +22,8 @@ export default {
       const itemsCount = this.ROW_LIST.length / 5;
       setTimeout(() => {
         const newItems = this.getItems(itemsCount, that.page++);
-
         if (newItems.length > 0) {
           that.arrayToRender.push(...newItems);
-          // that.page = that.page + 1;
           $state.loaded();
         } else {
           $state.complete();
