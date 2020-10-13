@@ -11,15 +11,16 @@ import ListContainer from "./components/list-container.vue";
 
 export default {
   methods: {
-    getItems(itemCount, page) {
+    getItems(itemsCount, page) {
       const curItemIndex = page === 1 ? 0 : page * (this.ROW_LIST.length / 5);
-      const itemsCountToGet = this.ROW_LIST.length / 5;
-      return [...this.ROW_LIST].splice(curItemIndex, itemsCountToGet);
+      return [...this.ROW_LIST].splice(curItemIndex, itemsCount);
     },
     infiniteHandler($state) {
       const that = this;
+      const itemsCount = this.ROW_LIST.length / 5;
       setTimeout(() => {
-        const newItems = this.getItems(5, that.iter);
+        const newItems = this.getItems(itemsCount, that.iter);
+        
         if (newItems.length > 0) {
           that.arrayToRender.push(...newItems);
           that.iter = that.iter + 1;
