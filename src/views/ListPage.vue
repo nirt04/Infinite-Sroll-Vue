@@ -12,7 +12,7 @@ import ListContainer from "./components/list-container.vue";
 export default {
   methods: {
     getItems(itemsCount, page) {
-      const curItemIndex = page === 1 ? 0 : (page - 1) * (this.ROW_LIST.length / 5);
+      const curItemIndex = page < 2 ? 0 : (page - 1) * (this.ROW_LIST.length / 5);
       return [...this.ROW_LIST].splice(curItemIndex, itemsCount);
     },
     infiniteHandler($state) {
