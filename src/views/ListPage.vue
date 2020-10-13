@@ -1,8 +1,7 @@
 <template>
   <div>
     <list-container :list="arrayToRender">
-      <infinite-loading @infinite="infiniteHandler">
-      </infinite-loading>
+      <infinite-loading @infinite="infiniteHandler" />
     </list-container>
   </div>
 </template>
@@ -35,7 +34,9 @@ export default {
     return {
       iter: 1,
       arrayToRender: [],
-      ROW_LIST: new Array(1000).fill(null).map((item, index) => `item - ${index + 1}`),
+      ROW_LIST: new Array(1000)
+        .fill(null)
+        .map((item, index) => `item - ${index + 1}`),
     };
   },
   components: { ListContainer, InfiniteLoading },
