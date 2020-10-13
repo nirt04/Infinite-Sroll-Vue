@@ -1,7 +1,7 @@
 <template>
   <div>
-    <list-container :list="arrayToRender || []">
-      <infinite-loading ref="InfiniteLoading" @infinite="infiniteHandler">
+    <list-container :list="arrayToRender">
+      <infinite-loading @infinite="infiniteHandler">
       </infinite-loading>
     </list-container>
   </div>
