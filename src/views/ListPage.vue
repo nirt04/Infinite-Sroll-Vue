@@ -19,12 +19,13 @@ export default {
   },
 
   methods: {
-    getLastRenderedIndex(pageNum, arrayPagesNum, array) {
+    getLastRenderedIndex(pageNum, arrayPagesNum, array) {  
       return pageNum < 2 ? 0 : (pageNum - 1) * (array.length / arrayPagesNum);
     },
 
     getItems(itemsCount, page) {
-      return [...this.ROW_LIST].splice( this.getLastRenderedIndex(page, this.arrayPagesNum, this.ROW_LIST), itemsCount );
+      const lastRenderedItemIndex = this.getLastRenderedIndex(page, this.arrayPagesNum, this.ROW_LIST)
+      return [...this.ROW_LIST].splice( lastRenderedItemIndex, itemsCount );
     },
 
     infiniteHandler($state) {
