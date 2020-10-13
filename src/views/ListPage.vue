@@ -20,10 +20,12 @@ export default {
       const itemsCount = this.ROW_LIST.length / 5;
       setTimeout(() => {
         const newItems = this.getItems(itemsCount, that.page++);
-        if (newItems.length > 0) { // If we have new items to push, we push and delcare loaded
+        if (newItems.length > 0) { 
+          // If we have new items to push, we push and delcare loaded
           that.arrayToRender.push(...newItems);
           $state.loaded();
-        } else { // If there are no items to push we declare complete and infinite scroll will stop being emited
+        } else {
+          // If there are no items to push we declare complete and infinite scroll will stop being emited
           $state.complete();
         }
       }, 300);
