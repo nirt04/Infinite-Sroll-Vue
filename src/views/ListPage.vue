@@ -10,8 +10,6 @@ import InfiniteLoading from "vue-infinite-loading";
 import ListContainer from "./components/list-container.vue";
 
 export default {
-  /* eslint-disable */
-
   methods: {
     getItems(itemsCount, page) {
       const curItemIndex = page === 1 ? 0 : (page - 1) * (this.ROW_LIST.length / 5);
