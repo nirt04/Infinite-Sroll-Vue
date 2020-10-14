@@ -23,8 +23,8 @@ export default {
     },
 
     getItems(itemsCount, page) {
-      const lastRenderedItemIndex = this.getLastRenderedIndex(page, this.maxPages, this.RAW_LIST)
-      return [...this.RAW_LIST].splice( lastRenderedItemIndex, itemsCount );
+      const lastIndex = this.getLastRenderedIndex(page, this.maxPages, this.RAW_LIST)
+      return [...this.RAW_LIST].splice( lastIndex, itemsCount );
     },
 
     infiniteHandler($state) {
