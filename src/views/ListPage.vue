@@ -13,7 +13,7 @@ import ListContainer from "./components/list-container.vue";
 export default {
   computed: {
     itemsCount() {
-      return this.ROW_LIST.length / this.maxPages;
+      return this.RAW_LIST.length / this.maxPages;
     },
   },
 
@@ -23,8 +23,8 @@ export default {
     },
 
     getItems(itemsCount, page) {
-      const lastRenderedItemIndex = this.getLastRenderedIndex(page, this.maxPages, this.ROW_LIST)
-      return [...this.ROW_LIST].splice( lastRenderedItemIndex, itemsCount );
+      const lastRenderedItemIndex = this.getLastRenderedIndex(page, this.maxPages, this.RAW_LIST)
+      return [...this.RAW_LIST].splice( lastRenderedItemIndex, itemsCount );
     },
 
     infiniteHandler($state) {
@@ -48,7 +48,7 @@ export default {
       page: 1,
       maxPages: 5,
       arrayToRender: [],
-      ROW_LIST: new Array(1000)
+      RAW_LIST: new Array(1000)
         .fill(null)
         .map((item, index) => `item - ${index + 1}`),
     };
