@@ -1,4 +1,4 @@
-# infinite-scroll-vuew
+# infinite-scroll-vue
 
 ## Project setup
 ```
