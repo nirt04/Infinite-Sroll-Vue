@@ -28,12 +28,11 @@ export default {
     },
 
     infiniteHandler($state) {
-      const that = this;
       setTimeout(() => {
-        const newItems = this.getItems(that.itemsCount, that.page++);
+        const newItems = this.getItems(this.itemsCount, this.page++);
         if (newItems.length > 0) {
           // If we have new items to push, we push and delcare loaded
-          that.list.push(...newItems);
+          this.list.push(...newItems);
           $state.loaded();
         } else {
           // If there are no items to push we declare complete and infinite scroll will stop being emited
