@@ -1,6 +1,6 @@
 <template>
   <div>
-    <list-container :list="arrayToRender">
+    <list-container :list="list">
       <infinite-loading @infinite="infiniteHandler" />
     </list-container>
   </div>
@@ -33,7 +33,7 @@ export default {
         const newItems = this.getItems(that.itemsCount, that.page++);
         if (newItems.length > 0) {
           // If we have new items to push, we push and delcare loaded
-          that.arrayToRender.push(...newItems);
+          that.list.push(...newItems);
           $state.loaded();
         } else {
           // If there are no items to push we declare complete and infinite scroll will stop being emited
@@ -47,7 +47,7 @@ export default {
     return {
       page: 1,
       maxPages: 5,
-      arrayToRender: [],
+      list: [],
       RAW_LIST: new Array(1000)
         .fill(null)
         .map((item, index) => `item - ${index + 1}`),
