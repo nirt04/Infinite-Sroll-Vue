@@ -1,6 +1,6 @@
 <template>
-  <v-list class="list-container-cmp" max-height="500px" max-width="350px">
-    <v-list-item-group>
+  <v-list class="list-container-cmp" :height="$attrs.maxHeight" max-width="350px">
+    <v-list-item-group >
       <template v-for="(item, i) in list">
         <v-list-item :key="i">
           <v-list-item-content>

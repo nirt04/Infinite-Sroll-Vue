@@ -1,17 +1,30 @@
 <template>
-  <div>
-    <list-container :list="virtualScrollList" ref="list-container"  @scroll.native="virtualScrollHandler">
+  <div
+    @scroll="virtualScrollHandler"
+    style="height: 500px; overflow-y: scroll; position: relative"
+  >
+          <!-- top: `${scrollPos < (itemHeight * RAW_LIST.length) ? scrollPos : itemHeight * RAW_LIST.length}px`, -->
+
+    <list-container
+      :style="{
+        position: 'absolute',
+        top: `${scrollPos < 475000 ? scrollPos : 475000}px`,
+      }"
+      :list="virtualScrollList"
+      :maxHeight="itemHeight * RAW_LIST.length"
+      ref="list-container"
+    >
       <!-- <infinite-loading @infinite="infiniteHandler" /> -->
     </list-container>
   </div>
 </template>
 <script>
- /* eslint-disable */
+/* eslint-disable */
 import InfiniteLoading from "vue-infinite-loading";
 import ListContainer from "./components/list-container.vue";
 import virtualScrollMixin from "./mixins/virtual-scroll-mixin";
 export default {
-  mounted () {
+  mounted() {
     console.log(this.virtualScrollHandler);
   },
   mixins: [virtualScrollMixin],

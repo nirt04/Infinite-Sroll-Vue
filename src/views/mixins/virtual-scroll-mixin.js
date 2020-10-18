@@ -19,10 +19,11 @@ export default {
     },
     virtualScrollList() {
       // const curIdx
-
-      const itemsToPush = [...this.RAW_LIST].slice(
-        this.firstItemIdx,
-        this.lastItemIdx
+      debugger;
+      const itemsLength = Math.floor( (this.containerHeight * 3) / this.itemHeight );
+      const firstItemIdx = Math.floor(this.scrollPos / this.itemHeight);
+      const lastlastItemIdx = itemsLength + firstItemIdx;
+      const itemsToPush = [...this.RAW_LIST].slice( firstItemIdx, lastlastItemIdx < this.RAW_LIST.length ? lastlastItemIdx : this.RAW_LIST.length
       );
       return itemsToPush;
     },
@@ -41,41 +42,23 @@ export default {
       scrollPos: 0,
       scrolledPrcentage: 0,
       containerHeight: 500,
-      containerScrollHeight: null,
+      // containerScrollHeight: null,
       itemHeight: 48,
     };
   },
   methods: {
     storeNewEventData({ target }) {
+      debugger;
       this.containerHeight = target.clientHeight;
-      this.containerScrollHeight = target.scrollHeight - target.clientHeight;
+      // this.containerScrollHeight = target.scrollHeight - target.clientHeight;
       this.scrollPos = target.scrollTop;
-      this.scrolledPrcentage = (this.scrollPos / this.containerHeight).toFixed( 2 );
+      this.scrolledPrcentage = (this.scrollPos / this.containerHeight).toFixed(
+        2
+      );
     },
 
     virtualScrollHandler(event) {
       this.storeNewEventData(event);
-      console.log(this.scrollPos);
-      debugger;
-      const bufferDiff = 
-      if (this.scrollPos > this.bufferSize / 3) {
-
-
-
-        const heightDiffFromBuffer = this.containerScrollHeight - this.bufferSize;
-        const itemsLengthToPush = Math.floor( heightDiffFromBuffer / this.itemHeight );
-        //   for (let i = 0; i < itemsLengthToPush.length; i++) {
-        //      this.
-
-        //   }
-        console.log("heightDiffFromBuffer", heightDiffFromBuffer);
-      }
-      //   console.log(
-      //     "hello virtual scroll handler",
-      //     scrollPos,
-      //     containerHeight,
-      //     scrolledPrcentage
-      //   );
     },
   },
 };
