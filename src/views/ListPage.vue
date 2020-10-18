@@ -1,16 +1,20 @@
 <template>
   <div>
-    <list-container :list="list">
-      <infinite-loading @infinite="infiniteHandler" />
+    <list-container :list="virtualScrollList" ref="list-container"  @scroll.native="virtualScrollHandler">
+      <!-- <infinite-loading @infinite="infiniteHandler" /> -->
     </list-container>
   </div>
 </template>
 <script>
-
+ /* eslint-disable */
 import InfiniteLoading from "vue-infinite-loading";
 import ListContainer from "./components/list-container.vue";
-
+import virtualScrollMixin from "./mixins/virtual-scroll-mixin";
 export default {
+  mounted () {
+    console.log(this.virtualScrollHandler);
+  },
+  mixins: [virtualScrollMixin],
   computed: {
     itemsCount() {
       return this.RAW_LIST.length / this.maxPages;
@@ -18,13 +22,17 @@ export default {
   },
 
   methods: {
-    getLastRenderedIndex(pageNum, maxPages, array) {  
+    getLastRenderedIndex(pageNum, maxPages, array) {
       return pageNum < 2 ? 0 : (pageNum - 1) * (array.length / maxPages);
     },
 
     getItems(itemsCount, page) {
-      const lastIndex = this.getLastRenderedIndex(page, this.maxPages, this.RAW_LIST)
-      return [...this.RAW_LIST].splice( lastIndex, itemsCount );
+      const lastIndex = this.getLastRenderedIndex(
+        page,
+        this.maxPages,
+        this.RAW_LIST
+      );
+      return [...this.RAW_LIST].splice(lastIndex, itemsCount);
     },
 
     infiniteHandler($state) {
