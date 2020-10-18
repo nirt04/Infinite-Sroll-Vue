@@ -3,18 +3,14 @@
     @scroll="virtualScrollHandler"
     style="height: 500px; overflow-y: scroll; position: relative"
   >
-          <!-- top: `${scrollPos < (itemHeight * RAW_LIST.length) ? scrollPos : itemHeight * RAW_LIST.length}px`, -->
-
     <list-container
-      :style="{
-        position: 'absolute',
-        top: `${scrollPos < 475000 ? scrollPos : 475000}px`,
-      }"
+      :bufferStyle="bufferStyle"
+      :style="{ ...virtualScrollStyle }"
       :list="virtualScrollList"
-      :maxHeight="itemHeight * RAW_LIST.length"
       ref="list-container"
+      class="list-container"
     >
-      <!-- <infinite-loading @infinite="infiniteHandler" /> -->
+      <infinite-loading @infinite="infiniteHandler" />
     </list-container>
   </div>
 </template>
@@ -54,6 +50,12 @@ export default {
         if (newItems.length > 0) {
           // If we have new items to push, we push and delcare loaded
           this.list.push(...newItems);
+          debugger;
+          // TO DO get container up
+          document
+            .querySelector(".list-container")
+            .scrollBy(0, -(newItems.length * 48));
+
           $state.loaded();
         } else {
           // If there are no items to push we declare complete and infinite scroll will stop being emited

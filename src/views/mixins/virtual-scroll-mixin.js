@@ -14,17 +14,29 @@ fdsdf
 
 export default {
   computed: {
+    bufferStyle() {
+      return {
+        overflowY: "hidden",
+        position: "absolute",
+        top: `${this.scrollPos < 47700 ? this.scrollPos : 47700}px`,
+      };
+    },
+    virtualScrollStyle() {
+      return {
+        overflowY: "hidden",
+        height: "49238.300px",
+        position: "relative",
+        // top: `${this.scrollPos < 49238.300 ? this.scrollPos : 49238.300}px`,
+      };
+    },
     bufferSize() {
       return this.containerHeight * 3;
     },
     virtualScrollList() {
-      // const curIdx
-      debugger;
       const itemsLength = Math.floor( (this.containerHeight * 3) / this.itemHeight );
-      const firstItemIdx = Math.floor(this.scrollPos / this.itemHeight);
+      const firstItemIdx = Math.floor(this.scrollPos / this.itemHeight) < this.RAW_LIST.length - itemsLength ? Math.floor(this.scrollPos / this.itemHeight) : this.RAW_LIST.length - itemsLength;
       const lastlastItemIdx = itemsLength + firstItemIdx;
-      const itemsToPush = [...this.RAW_LIST].slice( firstItemIdx, lastlastItemIdx < this.RAW_LIST.length ? lastlastItemIdx : this.RAW_LIST.length
-      );
+      const itemsToPush = [...this.RAW_LIST].slice( firstItemIdx, lastlastItemIdx < this.RAW_LIST.length ? lastlastItemIdx : this.RAW_LIST.length );
       return itemsToPush;
     },
   },
@@ -51,6 +63,11 @@ export default {
       debugger;
       this.containerHeight = target.clientHeight;
       // this.containerScrollHeight = target.scrollHeight - target.clientHeight;
+      // if (this.scrollPos >= 48000) {
+      //   this.scrollPos = 48000;
+      //   return;
+      // }
+
       this.scrollPos = target.scrollTop;
       this.scrolledPrcentage = (this.scrollPos / this.containerHeight).toFixed(
         2
